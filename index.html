@@ -44,6 +44,12 @@
 
     </form>
 
+    
+    <ul id = "userlista">
+
+    </ul>
+   
+
     <script src="/socket.io/socket.io.js"></script>
 
     <script>
@@ -61,7 +67,18 @@
             alert("Esse nome já existe..")
             window.location.href = '/';
           } 
-          
+        })
+
+        socket.on('users', function(us){
+          const user = document.getElementById('userlista');
+          user.innerHTML= '';
+
+          us.forEach( usuario => {
+            const lista = document.createElement('li');
+            lista.style.color = 'gray';
+            lista.textContent = `Usuário conectado: ${usuario}`;
+            user.appendChild(lista)
+          })
         })
 
         const mensagem = document.getElementById('messages');

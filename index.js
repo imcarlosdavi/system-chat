@@ -25,6 +25,8 @@ io.on('connection', (socket)=>{
             socket.broadcast.emit("hello", "world");
         }
     })
+    
+    io.to(socket.id).emit('users', usuarios);
 
     socket.on('chat message', (obj)=>{
         if(usuarios.indexOf(obj.nome) != -1 && usuarios.indexOf(obj.nome) == socketIds.indexOf(socket.id)){
@@ -43,6 +45,8 @@ io.on('connection', (socket)=>{
         console.log(usuarios);
         console.log('user disconnected');
     });
+
+    
 })
 
 http.listen(3000,()=>{
